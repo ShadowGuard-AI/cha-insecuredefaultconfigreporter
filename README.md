@@ -1,3 +1,5 @@
+![Banner](banner.png)
+
 # cha-InsecureDefaultConfigReporter
 Identifies configuration files using insecure default settings, highlighting potential vulnerabilities related to default passwords, open ports, and permissive access controls. - Focused on Analyzes system or application configurations against predefined security benchmarks (e.g., CIS benchmarks). Uses pyyaml to parse configuration files and jsonschema to validate them against defined schemas, highlighting deviations from security best practices.
 
