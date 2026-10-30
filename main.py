@@ -137,13 +137,25 @@ def main():
         else:
             logging.warning("No schema file provided. Skipping validation.")
 
-        # Implement insecure configuration checks (Example: Check for default passwords)
-        # Add your own checks here based on your specific security benchmarks.
-        if 'password' in config_data and config_data['password'] == 'password':
+        # An empty YAML file loads as None and a JSON file can load as a
+        # list. Both would crash the key checks below with a message that
+        # points at the wrong thing, so reject them here, in plain terms.
+        if not isinstance(config_data, dict):
+            raise ValueError(
+                f"Configuration must be a mapping of setting names to values, got {type(config_data).__name__}."
+            )
+
+        # The two default checks are independent on purpose. Chaining them
+        # with elif meant a file still shipping the factory "password"
+        # never got its default admin password reported in the same run.
+        found_default = False
+        if config_data.get('password') == 'password':
             logging.warning("Insecure default password detected. Please change it.")
-        elif 'admin_password' in config_data and config_data['admin_password'] == 'admin':
+            found_default = True
+        if config_data.get('admin_password') == 'admin':
             logging.warning("Insecure default admin password detected. Please change it.")
-        else:
+            found_default = True
+        if not found_default:
             logging.info("No default password found")
 
 
