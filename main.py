@@ -148,6 +148,13 @@ def main():
         # The two default checks are independent on purpose. Chaining them
         # with elif meant a file still shipping the factory "password"
         # never got its default admin password reported in the same run.
+        # This is the entire default detection: two key names, two
+        # exact values, top level only. A nested password, a value of
+        # Password with a capital, admin123, changeme, and every other
+        # factory default in the world all pass and produce the no
+        # default found line below. I keep the narrow scope visible
+        # here because the tool's name promises far more than these
+        # four comparisons deliver.
         found_default = False
         if config_data.get('password') == 'password':
             logging.warning("Insecure default password detected. Please change it.")
@@ -157,6 +164,9 @@ def main():
             found_default = True
         if not found_default:
             logging.info("No default password found")
+        # Finding a default is a warning, not a failure: the run exits
+        # 0 either way, so anything gating on this tool's exit code
+        # passes a config that ships the factory password.
 
 
     except FileNotFoundError as e:
