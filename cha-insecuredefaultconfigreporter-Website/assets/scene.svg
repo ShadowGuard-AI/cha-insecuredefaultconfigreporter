@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" role="img" aria-label="The studio in three depths: north light crosses the back wall once slowly, the blocked in figure on the canvas relaxes by small degrees across a long interval, and the brayer makes one short pass across its slab at rare intervals">
+<rect x="0" y="0" width="1200" height="300" fill="#f2e8d0"/>
+<g>
+<polygon points="120,20 320,20 260,250 60,250" fill="#fffce8" opacity="0">
+<animate attributeName="opacity" values="0;0.5;0" dur="30s" repeatCount="indefinite"/>
+</polygon>
+<g stroke="#8c7050" stroke-width="6" fill="none">
+<polygon points="830,250 870,60 920,66 890,250"/>
+<polygon points="900,250 950,52 1000,60 970,250"/>
+<polygon points="970,250 1030,66 1078,76 1030,250"/>
+</g>
+<rect x="150" y="216" width="130" height="16" fill="#c4a454"/>
+<rect x="150" y="200" width="130" height="16" fill="#c4a454"/>
+</g>
+<g>
+<rect x="480" y="52" width="250" height="180" fill="#f8f2e2" stroke="#78603e" stroke-width="4"/>
+<g opacity="1">
+<ellipse cx="605" cy="98" rx="27" ry="30" fill="#ceb296"/>
+<polygon points="548,232 566,140 644,140 662,232" fill="#96826e"/>
+<animate attributeName="opacity" values="1;0.25;1" dur="26s" repeatCount="indefinite"/>
+</g>
+<g opacity="0.25">
+<ellipse cx="605" cy="106" rx="27" ry="30" fill="#ceb296"/>
+<polygon points="544,232 560,152 650,152 666,232" fill="#96826e"/>
+<animate attributeName="opacity" values="0.25;1;0.25" dur="26s" repeatCount="indefinite"/>
+</g>
+<rect x="392" y="150" width="30" height="52" fill="#d2cec4" stroke="#827e72"/>
+<rect x="760" y="150" width="30" height="52" fill="#d2cec4" stroke="#827e72"/>
+</g>
+<g>
+<rect x="430" y="262" width="340" height="18" fill="#3a3630"/>
+<g>
+<animateTransform attributeName="transform" type="translate" values="0 0;0 0;120 0;120 0;0 0" keyTimes="0;0.62;0.72;0.94;1" dur="24s" repeatCount="indefinite"/>
+<rect x="470" y="248" width="90" height="14" rx="7" fill="#6e6a62"/>
+<line x1="515" y1="248" x2="515" y2="232" stroke="#4a463f" stroke-width="6"/>
+<circle cx="515" cy="230" r="6" fill="#4a463f"/>
+</g>
+</g>
+</svg>

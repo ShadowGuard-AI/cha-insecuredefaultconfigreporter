@@ -3,164 +3,122 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cha Insecuredefaultconfigreporter: what it is, how it runs, where it stops</title>
-<meta name="description" content="Cha Insecuredefaultconfigreporter is one of my projects. The README in the repo is short, so this page sticks to what the files themselves show.">
+<title>cha-insecuredefaultconfigreporter: The Portrait Sitter's Third Hour</title>
+<meta name="description" content="Checks a YAML or JSON configuration file for two built in default password values, and only two.">
 <style>
-:root {
-  --bg: #eee4d2; --panel: #f8f0e0; --ink: #4a1e22;
-  --mut: #ffffff;
-  --acc: #a83e36; --acc2: #406078;
-  --line: #f8f0e0;
-}
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink);
-  font-family: Verdana, Geneva, sans-serif; line-height: 1.55; }
-code, pre, .mono { font-family: 'Lucida Console', monospace; }
-a { color: var(--acc2); }
-.hero { padding: 3rem 6vw 1rem; }
-.hero img.banner { width: 100%; height: auto; border: 1px solid var(--line);
-  border-radius: 10px; }
-.logo { width: 92px; height: 92px; border-radius: 18px;
-  border: 1px solid var(--line); }
-h1 { font-size: 2.4rem; margin: 0.4em 0 0.1em; }
-h2 { border-bottom: 2px solid var(--acc); padding-bottom: 0.2em;
-  margin-top: 2em; }
-.lede { font-size: 1.15rem; max-width: 62ch; }
-main { padding: 0 6vw 3rem; max-width: 1180px; margin: 0 auto; }
-.grid { display: grid; gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
-.card { background: var(--panel); border: 1px solid var(--line);
-  border-radius: 12px; padding: 1rem 1.2rem; }
-.card.pop { animation: rise 0.7s ease both; }
-@keyframes rise { from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: none; } }
-pre.code { background: #101014; color: #e8e6df; padding: 1rem 1.2rem;
-  border-radius: 12px; overflow-x: auto; font-size: 0.86rem;
-  border-left: 5px solid var(--acc); }
-table { border-collapse: collapse; width: 100%; }
-td, th { border-bottom: 1px solid var(--line); padding: 0.45rem 0.6rem;
-  text-align: left; }
-.shots { display: grid; gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-.shots img { width: 100%; height: auto; border: 1px solid var(--line);
-  border-radius: 10px; background: #f4f1e8; }
-footer { padding: 2rem 6vw; border-top: 1px solid var(--line);
-  color: var(--mut); }
-.rail { display: flex; gap: 1.2rem; align-items: flex-start; }
-.rail nav { position: sticky; top: 1rem; min-width: 180px; }
-@media (max-width: 760px) { .rail { flex-direction: column; }
-  .rail nav { position: static; } }
-@media (prefers-reduced-motion: reduce) {
-  .card.pop { animation: none; } * { scroll-behavior: auto; } }
+@font-face{font-family:'Baloo Bhaijaan 2';src:url('fonts/BalooBhaijaan2.ttf') format('truetype');}
+@font-face{font-family:'Alegreya Sans';src:url('fonts/AlegreyaSans.ttf') format('truetype');}
+:root{--cream:#f2e8d0;--sheet:#faf4e2;--ink:#1c1814;--grey:#4a4238;--silver:#b9bcc0;--red:#c1272d}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--grey);font-family:'Alegreya Sans',sans-serif;line-height:1.65}
+h1,h2,h3{font-family:'Baloo Bhaijaan 2',sans-serif;color:var(--ink);font-weight:600}
+.hero{display:flex;flex-direction:column;justify-content:flex-end}
+.hero img.heroimg{width:100%;height:56vh;object-fit:cover;display:block}
+.hero .in{padding:1rem 6vw 2rem;max-width:1120px;margin:0 auto;width:100%}
+.hero h1{font-size:2rem;margin:.4rem 0}
+.logo{width:200px}
+main{padding:0 6vw 3rem;max-width:1120px;margin:0 auto}
+nav{display:flex;gap:.9rem;flex-wrap:wrap;margin:1.2rem 0}
+.canvasbtn{display:inline-block;text-decoration:none;background:var(--sheet);border:5px solid #a8895a;color:var(--ink);font-family:'Baloo Bhaijaan 2',sans-serif;padding:.55rem 1.3rem;text-align:center;position:relative}
+.canvasbtn::after{content:'';position:absolute;right:6px;bottom:5px;width:15px;height:12px;border:2px solid var(--ink);border-bottom:none}
+.canvasbtn:hover{background:radial-gradient(ellipse at 50% 50%,#d8dade,var(--sheet) 72%)}
+.canvasbtn:active{background:linear-gradient(90deg,transparent 0 12%,rgba(28,24,20,.55) 12% 15%,transparent 15%)}
+.canvasbtn:focus-visible{outline:2px double var(--ink);outline-offset:4px}
+a{color:#5a4632}
+a::before{content:'';display:inline-block;width:10px;height:13px;margin-right:.45em;background:#8f8c84;border-radius:3px 3px 4px 4px;vertical-align:-2px}
+a:hover::before{background:var(--red)}
+a.canvasbtn::before{content:none}
+.sheet{background:var(--sheet);border:1px solid #ddd2b2;padding:.4rem 1.8rem 1.5rem;margin:1.8rem 0;position:relative;background-image:repeating-linear-gradient(180deg,transparent 0 30px,rgba(28,24,20,.07) 30px 31px)}
+.sheet h2{font-size:1.55rem;border-bottom:1px solid #cfc4a2;padding-bottom:.3rem}
+.jar{width:16px;height:16px;display:inline-block;margin-right:.5rem;vertical-align:-2px}
+pre{background:#efe7cf;padding:1rem;overflow-x:auto;font-size:1rem;border-left:4px solid var(--silver)}
+.cmd{font-size:1.3rem;text-align:center;font-weight:700}
+.brayer{height:13px;margin:2.2rem 0;background:linear-gradient(90deg,transparent,var(--ink) 18%,var(--ink) 82%,transparent);opacity:.8}
+table{border-collapse:collapse;width:100%}
+td,th{padding:.55rem .7rem;border-bottom:1px solid #ddd2b2;text-align:left;vertical-align:top}
+td b{font-family:'Baloo Bhaijaan 2',sans-serif;color:var(--ink);font-weight:600}
+.proof{background:#fffdf4;border:1px solid #ddd2b2;border-left:6px solid var(--red);padding:.2rem 1.4rem 1.1rem;margin:1.3rem 0}
+.proof h3{font-size:1.3rem}
+.fault{border:3px double var(--red);padding:.2rem 1.4rem 1.1rem;margin:1.3rem 0;background:#fffdf4}
+.redline{color:var(--red);font-weight:700;font-size:1.1rem}
+footer{padding:1rem 6vw 2.4rem;max-width:1120px;margin:0 auto}
 </style>
 </head>
-<body class="layout-cards">
-<!-- This page exists for cha-insecuredefaultconfigreporter alone: the layout (index-cards),
-     the colors, and the type were picked for this project, not
-     shared with the other project pages. The code block below is
-     copied from the file it names, line for line. If it looks
-     plain, that is because the project is plain, and I would
-     rather the page match the project than dress it up. The one
-     thing I will not do here is oversell: what this project does
-     not do is stated on the page, not hidden from it. -->
+<body>
 <header class="hero">
-  <img class="logo" src="assets/logo.png" alt="Cha Insecuredefaultconfigreporter logo">
-  <img class="banner" src="assets/banner.png" alt="">
-  <h1>Cha Insecuredefaultconfigreporter</h1>
-  <p class="mono"><a href="https://github.com/ShadowGuard-AI/cha-insecuredefaultconfigreporter">github.com/ShadowGuard-AI/cha-insecuredefaultconfigreporter</a></p>
+<img class="heroimg" src="assets/intro-banner.png" alt="A portrait studio at the third hour: the empty sitter chair large in the foreground on its chalk line, an easel with an unfinished canvas, brush jars, pigment jars, stretchers fanned at the back wall, and a tall north window, no lettering anywhere">
+<div class="in">
+<img class="logo" src="assets/logo.png" alt="The sitter chair alone: a high backed wooden chair with a worn velvet seat pad and its sag, one armrest ending in a rounded knob, and one short red proof stroke on the boards beside the front left leg">
+<h1>cha-insecuredefaultconfigreporter</h1>
+<p>A studio inventory ledger unrolled in sittings. The narrow truth of the tool comes first, in the largest type after the title, and the limits are given a sitting of their own.</p>
+<nav>
+<a class="canvasbtn" href="#run">Check This Configuration</a>
+<a class="canvasbtn" href="#run">Validate Against a Schema</a>
+<a class="canvasbtn" href="#args">State the File Type</a>
+<a class="canvasbtn" href="#args">Show Help</a>
+</nav>
+</div>
 </header>
-
 <main>
-  <section class="rail">
-    <nav aria-label="on this page">
-      <p class="mono"><a href="#run">Run it</a><br>
-      <a href="#files">The files</a><br>
-      <a href="#sheets">The sheets</a><br>
-      <a href="https://github.com/ShadowGuard-AI/cha-insecuredefaultconfigreporter">The repo</a></p>
-    </nav>
-    <div>
-      <p class="lede">Cha Insecuredefaultconfigreporter is one of my projects. The README in the repo is short, so this page sticks to what the files themselves show.</p>
-      <div class="grid">
-        <div class="card pop"><h3>What it is</h3>
-          <p>Cha Insecuredefaultconfigreporter: 5 files, 220 counted
-          lines across Python 199, Markdown 19, Text 2. One job, done in the
-          open, in files you can read.</p></div>
-        <div class="card pop"><h3>The biggest piece</h3>
-          <p><code>main.py</code> carries the most
-          lines. If the project grows, that file is where the growth
-          lands first, for better or worse.</p></div>
-        <div class="card pop"><h3>The honest gap</h3>
-          <p>No test files yet. That is the honest gap, and the roadmap in the visuals folder says what the first one should cover.</p></div>
-      </div>
-      <section id="run">
-        <h2>Run it</h2>
-        <p>The repo README has the exact commands for this one. The
-        shape is the shape for most of my projects: clone it, read the
-        top file first so you know what will happen, then run it on
-        something you do not mind breaking.</p>
-        <p class="mono">$ git clone https://github.com/ShadowGuard-AI/cha-insecuredefaultconfigreporter.git<br>$ cd cha-insecuredefaultconfigreporter</p>
-      </section>
-      
-  <section aria-label="real code">
-    <h2>The code, as it sits in the repo</h2>
-    <p>From <code>main.py</code>, line 10 on. I did
-    not tidy it for the page. What you see is what the file has.</p>
-    <pre class="code"><code>logging.basicConfig(level=logging.INFO, format=&#x27;%(asctime)s - %(levelname)s - %(message)s&#x27;)
-
-def setup_argparse():
-    &quot;&quot;&quot;
-    Sets up the argument parser for the command-line interface.
-    &quot;&quot;&quot;
-    parser = argparse.ArgumentParser(description=&quot;Identifies insecure default configurations.&quot;)
-    parser.add_argument(&quot;config_file&quot;, help=&quot;Path to the configuration file (YAML or JSON).&quot;)
-    parser.add_argument(&quot;-s&quot;, &quot;--schema_file&quot;, help=&quot;Path to the JSON schema file for validation.&quot;)
-    parser.add_argument(&quot;-t&quot;, &quot;--type&quot;, choices=[&#x27;yaml&#x27;, &#x27;json&#x27;], help=&quot;Specify the type of the configuration file (yaml or json). Auto-detect if not provided&quot;)
-    parser.add_argument(&quot;-l&quot;, &quot;--log_level&quot;, choices=[&#x27;DEBUG&#x27;, &#x27;INFO&#x27;, &#x27;WARNING&#x27;, &#x27;ERROR&#x27;, &#x27;CRITICAL&#x27;], default=&#x27;INFO&#x27;, help=&quot;Set the logging level (default: INFO)&quot;)
-    return parser
-
-def load_config_file(config_file, file_type=None):
-    &quot;&quot;&quot;
-    Loads a configuration file (YAML or JSON).
-
-    Args:
-        config_file (str): Path to the configuration file.
-        file_type (str, optional): Explicitly specify the file type (&#x27;yaml&#x27; or &#x27;json&#x27;). Auto-detect if None.
-
-    Returns:</code></pre>
-  </section>
-      <section id="files">
-        <h2>The files that matter</h2>
-        <table><tr><th>File</th><th>Lines</th></tr>
-        <tr><td><code>main.py</code></td><td>199</td></tr>
-        <tr><td><code>README.md</code></td><td>19</td></tr>
-        <tr><td><code>requirements.txt</code></td><td>2</td></tr>
-        <tr><td><code>banner.png</code></td><td>0</td></tr>
-        <tr><td><code>logo.png</code></td><td>0</td></tr>
-        </table>
-        <p>Names doing the work: <span class="mono">setup_argparse, load_config_file, load_schema_file, validate_config, main</span>.</p>
-      </section>
-      <section id="sheets">
-        <h2>Drawn by hand</h2>
-        <p>I sketch my projects on notebook paper so I have to
-        understand them well enough to draw them. The full set,
-        with the counts and how they were counted, is the
-        <a href="https://github.com/ShadowGuard-AI/cha-insecuredefaultconfigreporter/tree/main/cha-insecuredefaultconfigreporter-Visuals">cha-insecuredefaultconfigreporter-Visuals</a>
-        folder in the repo. Nothing is drawn over the binder holes.
-        That is a rule, not a style.</p>
-        <div class="shots">
-          <img src="assets/architecture.png" alt="Hand drawn architecture sheet for Cha Insecuredefaultconfigreporter">
-          <img src="assets/flowchart.png" alt="Hand drawn flowchart sheet for Cha Insecuredefaultconfigreporter">
-          <img src="assets/product-map.png" alt="Hand drawn product map sheet for Cha Insecuredefaultconfigreporter">
-        </div>
-      </section>
-    </div>
-  </section>
+<section class="sheet">
+<h2><svg class="jar" viewBox="0 0 16 16"><rect x="3" y="4" width="10" height="10" rx="2" fill="#8f8c84"/></svg>Two Values, and Only Two</h2>
+<p style="font-size:1.2rem">cha-InsecureDefaultConfigReporter checks a YAML or JSON configuration file for two built in default password values, and only two: the password setting set to password, and the admin_password setting set to admin. It uses pyyaml to parse configuration files and, when the user supplies a JSON schema file, jsonschema to validate the configuration against that user supplied schema. No other built in checks ship in this tool: it does not check ports or access controls.</p>
+<p class="redline">It does not check ports or access controls.</p>
+<p>The project name promises a breadth the program does not claim for itself in code, and a visitor should meet the limit before the instructions.</p>
+</section>
+<div class="brayer"></div>
+<section class="sheet">
+<h2><svg class="jar" viewBox="0 0 16 16"><rect x="3" y="4" width="10" height="10" rx="2" fill="#8f8c84"/></svg>Getting the Code</h2>
+<div class="fault"><h3>Wrong Organisation, Left as Printed</h3>
+<pre>git clone https://github.com/ShadowStrikeHQ/cha-insecuredefaultconfigreporter</pre>
+<p>ShadowStrikeHQ is the wrong organisation for this repository, which lives under ShadowGuard-AI. The line is reproduced as printed so the fault stays on record.</p></div>
+<p>No further install steps appear in the README, no directory change and no dependency install, although requirements.txt in the repository names jsonschema at 4.17.0 or above and PyYAML at 6.0 or above. Those names are noted as repository facts. They are not turned into an instruction the README never gave.</p>
+<p><a href="https://github.com/ShadowGuard-AI/cha-insecuredefaultconfigreporter">The repository on GitHub</a></p>
+</section>
+<div class="brayer"></div>
+<section class="sheet">
+<h2><svg class="jar" viewBox="0 0 16 16"><rect x="3" y="4" width="10" height="10" rx="2" fill="#8f8c84"/></svg>The Usage Line as Printed</h2>
+<pre class="cmd">./cha-insecuredefaultconfigreporter [params]</pre>
+<div class="proof"><h3>A Red Proof Stroke on the Printed Line</h3>
+<p>The repository contains no executable of that name. The entry point is main.py, and the argument that matters most, the configuration file itself, is a required positional argument that the printed line hides inside the word params.</p></div>
+<p>The worked shapes from the foot of main.py, as plain lines:</p>
+<pre>python cha-InsecureDefaultConfigReporter.py config.yaml -s schema.json
+python cha-InsecureDefaultConfigReporter.py config.yaml -s schema.json -l DEBUG
+python cha-InsecureDefaultConfigReporter.py config.yaml
+python cha-InsecureDefaultConfigReporter.py config.custom -t yaml</pre>
+<p>A configuration with a schema, a configuration with a schema and the log level set to DEBUG, a configuration with no schema at all, and a file with a custom ending whose type is stated outright with -t yaml. The example file names are the ones main.py itself uses: config.yaml, config.json, schema.json, and config.custom.</p>
+</section>
+<div class="brayer"></div>
+<section class="sheet" id="args">
+<h2><svg class="jar" viewBox="0 0 16 16"><rect x="3" y="4" width="10" height="10" rx="2" fill="#8f8c84"/></svg>Arguments in Full</h2>
+<table>
+<tr><td><b>config_file</b></td><td>Positional. Path to the configuration file in YAML or JSON. Required. The README parameter list omits this argument altogether.</td></tr>
+<tr><td><b>-h</b></td><td>Shows the help message and exits.</td></tr>
+<tr><td><b>-s, --schema_file</b></td><td>Takes the path to the JSON schema file for validation. The one optional flag the README does describe.</td></tr>
+<tr><td><b>-t, --type</b></td><td>Chooses yaml or json for the configuration file and auto detects when it is not provided. The README lists it with the words No description provided.</td></tr>
+<tr><td><b>-l, --log_level</b></td><td>Sets the logging level, choosing among DEBUG, INFO, WARNING, ERROR, and CRITICAL, with INFO as the default. Its entry carries the same README note, since the README describes it no further either.</td></tr>
+</table>
+</section>
+<div class="brayer"></div>
+<section class="sheet" id="run">
+<h2><svg class="jar" viewBox="0 0 16 16"><rect x="3" y="4" width="10" height="10" rx="2" fill="#8f8c84"/></svg>How a Run Proceeds</h2>
+<p>The logging level is set. The configuration is loaded, by file ending when no type is given, .yaml and .yml as YAML and .json as JSON, with an ending it cannot place refused in the words Could not determine the file type. Please specify with --type.</p>
+<p>When a schema file is given, it is loaded and the configuration is validated, and a valid result is logged as Configuration is valid according to the schema. When none is given, the run warns No schema file provided. Skipping validation. and goes on.</p>
+<p>The loaded configuration must be a mapping of setting names to values. An empty YAML file, which loads as None, and a JSON file that loads as a list are both refused with a plain message naming what was got instead, rather than failing later inside the key checks.</p>
+<p>Then the two checks run, independently, never as alternatives. A top level password equal to password logs the warning Insecure default password detected. Please change it. and a top level admin_password equal to admin logs Insecure default admin password detected. Please change it. A file can earn both warnings in one run. If neither matches, the run logs No default password found.</p>
+</section>
+<div class="brayer"></div>
+<section class="sheet">
+<h2><svg class="jar" viewBox="0 0 16 16"><rect x="3" y="4" width="10" height="10" rx="2" fill="#8f8c84"/></svg>What the Check Cannot See</h2>
+<div class="proof"><h3>Top Level, Exact Values Only</h3>
+<p>The comparison is for exact values at the top level only. A nested password is not seen. Password with a capital letter is not matched. admin123, changeme, and every other factory default in the world pass and produce the no default found line.</p></div>
+<div class="proof"><h3>A Default Found Still Exits 0</h3>
+<p>Finding a default is a warning, not a failure: the run exits 0 either way, so anything gating on this tool exit code passes a configuration that still ships the factory password. Errors are the opposite case: a missing configuration file, an unparsable YAML or JSON file, a schema validation failure, and the mapping refusal all end the run at exit 1.</p></div>
+<h2>Licence Line as Printed</h2>
+<div class="fault"><h3>Wrong Organisation, Left as Printed</h3>
+<pre>Copyright (c) ShadowStrikeHQ</pre>
+<p>The same wrong organisation as the clone line. The repository carries a separate LICENSE file headed MIT License, while the README itself names no licence at all.</p></div>
+</section>
 </main>
-<footer>
-  <p>Cha Insecuredefaultconfigreporter is one of my projects. This page was written
-  from the repo itself on 2026-10-30: the counts are the
-  repo's counts, the code is the repo's code, and the gaps are the
-  repo's gaps.</p>
-</footer>
+<footer><p>Theme: The Portrait Sitter's Third Hour. Type: Baloo Bhaijaan 2 for headings, Alegreya Sans for reading, both SIL Open Font License 1.1. The lettering reference Brush King was reference only and is not embedded.</p></footer>
 </body>
 </html>

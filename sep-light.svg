@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 24" role="img" aria-label="A minor divider: a brayer pass rolled across the centre of the page only">
+<defs><linearGradient id="b" x1="0" y1="0" x2="1" y2="0">
+<stop offset="0" stop-color="#1c1814" stop-opacity="0"/>
+<stop offset="0.5" stop-color="#1c1814" stop-opacity="1"/>
+<stop offset="1" stop-color="#1c1814" stop-opacity="0"/>
+</linearGradient></defs>
+<rect x="350" y="5" width="500" height="14" fill="url(#b)"/>
+</svg>
