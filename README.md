@@ -1,12 +1,12 @@
-![A portrait studio at the third hour: the empty sitter chair large in the foreground on its chalk line, an easel with an unfinished canvas, brush jars, pigment jars, stretchers fanned at the back wall, and a tall north window, no lettering anywhere](intro-banner.png)
+![The builder's key close up turning in the brass lock, its plain red tag swinging, the inspector's hand at the frame edge and the white door soft behind](intro-banner.png)
 
 > Medium noted first: linseed oil ground on canvas stretchers, Baloo Bhaijaan 2 in print ink black, a studio inventory entry.
 
 # cha-insecuredefaultconfigreporter
 
-![The sitter chair alone: a high backed wooden chair with a worn velvet seat pad and its sag, one armrest ending in a rounded knob, and one short red proof stroke on the boards beside the front left leg](logo.png)
+![A new white front door with its brass lock at the centre, the builder's key in the lock on a plain red tag with no markings, the heading plate](logo.png)
 
-![A portrait studio in its third hour: the empty chair at the centre, the easel and unfinished canvas at the right, jars and knives in their places, and the project name entered on the inventory board](banner.png)
+![A fresh hallway in a just finished house: an inspector with a blank snagging board under one arm checking the front door lock, the builder's key on its plain red tag still in the brass lock, the other fittings still wrapped](banner.png)
 
 ![The studio in three depths: north light crosses the back wall once slowly, the blocked in figure on the canvas relaxes by small degrees across a long interval, and the brayer makes one short pass across its slab at rare intervals](scene.svg)
 
