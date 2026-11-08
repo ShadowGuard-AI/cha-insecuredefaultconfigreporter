@@ -3,122 +3,103 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>cha-insecuredefaultconfigreporter: The Portrait Sitter's Third Hour</title>
-<meta name="description" content="Checks a YAML or JSON configuration file for two built in default password values, and only two.">
+<title>cha-insecuredefaultconfigreporter: The Handover</title>
 <style>
-@font-face{font-family:'Baloo Bhaijaan 2';src:url('fonts/BalooBhaijaan2.ttf') format('truetype');}
-@font-face{font-family:'Alegreya Sans';src:url('fonts/AlegreyaSans.ttf') format('truetype');}
-:root{--cream:#f2e8d0;--sheet:#faf4e2;--ink:#1c1814;--grey:#4a4238;--silver:#b9bcc0;--red:#c1272d}
-*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--grey);font-family:'Alegreya Sans',sans-serif;line-height:1.65}
-h1,h2,h3{font-family:'Baloo Bhaijaan 2',sans-serif;color:var(--ink);font-weight:600}
-.hero{display:flex;flex-direction:column;justify-content:flex-end}
-.hero img.heroimg{width:100%;height:56vh;object-fit:cover;display:block}
-.hero .in{padding:1rem 6vw 2rem;max-width:1120px;margin:0 auto;width:100%}
-.hero h1{font-size:2rem;margin:.4rem 0}
-.logo{width:200px}
-main{padding:0 6vw 3rem;max-width:1120px;margin:0 auto}
-nav{display:flex;gap:.9rem;flex-wrap:wrap;margin:1.2rem 0}
-.canvasbtn{display:inline-block;text-decoration:none;background:var(--sheet);border:5px solid #a8895a;color:var(--ink);font-family:'Baloo Bhaijaan 2',sans-serif;padding:.55rem 1.3rem;text-align:center;position:relative}
-.canvasbtn::after{content:'';position:absolute;right:6px;bottom:5px;width:15px;height:12px;border:2px solid var(--ink);border-bottom:none}
-.canvasbtn:hover{background:radial-gradient(ellipse at 50% 50%,#d8dade,var(--sheet) 72%)}
-.canvasbtn:active{background:linear-gradient(90deg,transparent 0 12%,rgba(28,24,20,.55) 12% 15%,transparent 15%)}
-.canvasbtn:focus-visible{outline:2px double var(--ink);outline-offset:4px}
-a{color:#5a4632}
-a::before{content:'';display:inline-block;width:10px;height:13px;margin-right:.45em;background:#8f8c84;border-radius:3px 3px 4px 4px;vertical-align:-2px}
-a:hover::before{background:var(--red)}
-a.canvasbtn::before{content:none}
-.sheet{background:var(--sheet);border:1px solid #ddd2b2;padding:.4rem 1.8rem 1.5rem;margin:1.8rem 0;position:relative;background-image:repeating-linear-gradient(180deg,transparent 0 30px,rgba(28,24,20,.07) 30px 31px)}
-.sheet h2{font-size:1.55rem;border-bottom:1px solid #cfc4a2;padding-bottom:.3rem}
-.jar{width:16px;height:16px;display:inline-block;margin-right:.5rem;vertical-align:-2px}
-pre{background:#efe7cf;padding:1rem;overflow-x:auto;font-size:1rem;border-left:4px solid var(--silver)}
-.cmd{font-size:1.3rem;text-align:center;font-weight:700}
-.brayer{height:13px;margin:2.2rem 0;background:linear-gradient(90deg,transparent,var(--ink) 18%,var(--ink) 82%,transparent);opacity:.8}
-table{border-collapse:collapse;width:100%}
-td,th{padding:.55rem .7rem;border-bottom:1px solid #ddd2b2;text-align:left;vertical-align:top}
-td b{font-family:'Baloo Bhaijaan 2',sans-serif;color:var(--ink);font-weight:600}
-.proof{background:#fffdf4;border:1px solid #ddd2b2;border-left:6px solid var(--red);padding:.2rem 1.4rem 1.1rem;margin:1.3rem 0}
-.proof h3{font-size:1.3rem}
-.fault{border:3px double var(--red);padding:.2rem 1.4rem 1.1rem;margin:1.3rem 0;background:#fffdf4}
-.redline{color:var(--red);font-weight:700;font-size:1.1rem}
-footer{padding:1rem 6vw 2.4rem;max-width:1120px;margin:0 auto}
+@font-face { font-family: "Amaranth"; src: url("fonts/Amaranth-400.woff2") format("woff2"); font-weight: 400; }
+@font-face { font-family: "Amaranth"; src: url("fonts/Amaranth-700.woff2") format("woff2"); font-weight: 700; }
+@font-face { font-family: "Cantarell"; src: url("fonts/Cantarell-400.woff2") format("woff2"); font-weight: 400; }
+@font-face { font-family: "Cantarell"; src: url("fonts/Cantarell-700.woff2") format("woff2"); font-weight: 700; }
+:root {
+  --paper: #fbfaf7; --cream: #f0eee9; --ink: #33302a; --soft: #6f6a5e;
+  --plaster: #8b867c; --brass: #a67c1a; --red: #c22f2f; --line: #ddd8cc; --card: #ffffff;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--cream); color: var(--ink); font-family: "Cantarell", sans-serif; line-height: 1.55; }
+.wrap { max-width: 960px; margin: 0 auto; padding: 0 20px 64px; }
+header.hero { text-align: center; padding: 52px 0 8px; }
+img.hero-logo { width: min(430px, 82vw); border-radius: 10px; box-shadow: 0 10px 34px rgba(51,48,42,.22); }
+h1, h2 { font-family: "Amaranth", sans-serif; line-height: 1.15; }
+h1 { font-size: clamp(28px, 5vw, 46px); margin: 26px 0 6px; }
+.tagline { color: var(--soft); font-size: 19px; margin: 0 auto; max-width: 660px; }
+.btns { margin: 22px 0 6px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+a.btn { font-family: "Amaranth", sans-serif; text-decoration: none; padding: 11px 22px; border-radius: 999px; border: 2px solid var(--brass); color: var(--brass); background: transparent; }
+a.btn.solid { background: var(--red); border-color: var(--red); color: #fff; }
+figure { margin: 30px 0; }
+figure img { width: 100%; border-radius: 10px; display: block; box-shadow: 0 8px 28px rgba(51,48,42,.18); }
+figcaption { color: var(--soft); font-size: 15px; text-align: center; margin-top: 9px; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 34px 0; }
+.fact { background: var(--card); border: 1px solid var(--line); border-top: 5px solid var(--red); border-radius: 8px; padding: 14px 16px; }
+.fact b { display: block; font-family: "Amaranth", sans-serif; font-size: 15px; letter-spacing: .04em; text-transform: uppercase; color: var(--plaster); margin-bottom: 4px; }
+section { margin: 38px 0; }
+h2 { font-size: 27px; margin: 0 0 12px; border-bottom: 2px solid var(--line); padding-bottom: 7px; }
+code, pre { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+pre { background: #2e2a24; color: #f3ecdd; padding: 15px 18px; border-radius: 8px; overflow-x: auto; font-size: 14.5px; }
+table { border-collapse: collapse; width: 100%; background: var(--card); }
+th, td { border: 1px solid var(--line); padding: 9px 12px; text-align: left; vertical-align: top; }
+th { font-family: "Amaranth", sans-serif; background: var(--cream); }
+.hold { background: #fdf0f0; border: 1px solid #e8c0c0; border-left: 6px solid var(--red); border-radius: 8px; padding: 16px 20px; }
+.hold h2 { border: none; padding: 0; }
+.hold ul { margin: 8px 0 4px; padding-left: 20px; }
+footer { margin-top: 52px; border-top: 2px solid var(--line); padding-top: 16px; color: var(--soft); font-size: 14.5px; text-align: center; }
 </style>
 </head>
 <body>
+<div class="wrap">
 <header class="hero">
-<img class="heroimg" src="assets/intro-banner.png" alt="A portrait studio at the third hour: the empty sitter chair large in the foreground on its chalk line, an easel with an unfinished canvas, brush jars, pigment jars, stretchers fanned at the back wall, and a tall north window, no lettering anywhere">
-<div class="in">
-<img class="logo" src="assets/logo.png" alt="The sitter chair alone: a high backed wooden chair with a worn velvet seat pad and its sag, one armrest ending in a rounded knob, and one short red proof stroke on the boards beside the front left leg">
-<h1>cha-insecuredefaultconfigreporter</h1>
-<p>A studio inventory ledger unrolled in sittings. The narrow truth of the tool comes first, in the largest type after the title, and the limits are given a sitting of their own.</p>
-<nav>
-<a class="canvasbtn" href="#run">Check This Configuration</a>
-<a class="canvasbtn" href="#run">Validate Against a Schema</a>
-<a class="canvasbtn" href="#args">State the File Type</a>
-<a class="canvasbtn" href="#args">Show Help</a>
-</nav>
-</div>
+  <img class="hero-logo" src="assets/logo.png" alt="A new white front door with its brass lock at the centre, the builder's key in the lock on a plain red tag with no markings">
+  <h1>cha-insecuredefaultconfigreporter</h1>
+  <p class="tagline">The Handover. A command line tool that asks one blunt question of a configuration file: whether two named settings still hold exactly what the maker shipped, the builder's key still in the lock.</p>
+  <div class="btns">
+    <a class="btn solid" href="https://github.com/ShadowGuard-AI/cha-insecuredefaultconfigreporter">The repository</a>
+    <a class="btn" href="https://github.com/ShadowGuard-AI/cha-insecuredefaultconfigreporter/blob/main/main.py">main.py</a>
+  </div>
 </header>
-<main>
-<section class="sheet">
-<h2><svg class="jar" viewBox="0 0 16 16"><rect x="3" y="4" width="10" height="10" rx="2" fill="#8f8c84"/></svg>Two Values, and Only Two</h2>
-<p style="font-size:1.2rem">cha-InsecureDefaultConfigReporter checks a YAML or JSON configuration file for two built in default password values, and only two: the password setting set to password, and the admin_password setting set to admin. It uses pyyaml to parse configuration files and, when the user supplies a JSON schema file, jsonschema to validate the configuration against that user supplied schema. No other built in checks ship in this tool: it does not check ports or access controls.</p>
-<p class="redline">It does not check ports or access controls.</p>
-<p>The project name promises a breadth the program does not claim for itself in code, and a visitor should meet the limit before the instructions.</p>
+
+<figure>
+  <img src="assets/intro-banner.png" alt="The builder's key close up turning in the brass lock, its plain red tag swinging, the inspector's hand at the frame edge and the white door soft behind">
+  <figcaption>The key turns because it was never changed.</figcaption>
+</figure>
+
+<div class="facts">
+  <div class="fact"><b>The whole check</b>Two exact top level comparisons: password equal to password, and admin_password equal to admin</div>
+  <div class="fact"><b>Input</b>One YAML or JSON configuration file, a required positional argument, loaded as a mapping</div>
+  <div class="fact"><b>Dependencies</b>jsonschema 4.17.0 or later and PyYAML 6.0 or later</div>
+  <div class="fact"><b>Default found</b>A warning only: the run exits 0 either way</div>
+</div>
+
+<section>
+  <h2>Usage</h2>
+  <pre>python3 main.py CONFIG_FILE [-s SCHEMA] [-t yaml|json] [-l LEVEL]</pre>
+  <p>The entry point is main.py, and the configuration file is a required positional argument on every run. The README's own parameter list omits that argument entirely, and its usage line names an executable the repository does not contain.</p>
+  <table>
+    <tr><th>Option</th><th>What it does</th></tr>
+    <tr><td><code>CONFIG_FILE</code></td><td>Path to the configuration file in YAML or JSON (required). It must load as a mapping of setting names to values.</td></tr>
+    <tr><td><code>-s</code>, <code>--schema_file</code></td><td>Path to the JSON schema file for validation. Without one, the run warns that validation is skipped.</td></tr>
+    <tr><td><code>-t</code>, <code>--type</code></td><td>yaml or json, for a file whose ending cannot place it. Without it, the type is detected by ending; an unplaceable ending is refused with the words: Could not determine the file type. Please specify with --type.</td></tr>
+    <tr><td><code>-l</code>, <code>--log_level</code></td><td>Log level among DEBUG, INFO, WARNING, ERROR, and CRITICAL. Default: INFO.</td></tr>
+    <tr><td><code>-h</code></td><td>Show help message and exit.</td></tr>
+  </table>
 </section>
-<div class="brayer"></div>
-<section class="sheet">
-<h2><svg class="jar" viewBox="0 0 16 16"><rect x="3" y="4" width="10" height="10" rx="2" fill="#8f8c84"/></svg>Getting the Code</h2>
-<div class="fault"><h3>Wrong Organisation, Left as Printed</h3>
-<pre>git clone https://github.com/ShadowStrikeHQ/cha-insecuredefaultconfigreporter</pre>
-<p>ShadowStrikeHQ is the wrong organisation for this repository, which lives under ShadowGuard-AI. The line is reproduced as printed so the fault stays on record.</p></div>
-<p>No further install steps appear in the README, no directory change and no dependency install, although requirements.txt in the repository names jsonschema at 4.17.0 or above and PyYAML at 6.0 or above. Those names are noted as repository facts. They are not turned into an instruction the README never gave.</p>
-<p><a href="https://github.com/ShadowGuard-AI/cha-insecuredefaultconfigreporter">The repository on GitHub</a></p>
+
+<figure>
+  <img src="assets/banner.png" alt="A fresh hallway in a just finished house: an inspector with a blank snagging board under one arm checking the front door lock, the builder's key on its plain red tag still in the brass lock, the other fittings still wrapped">
+  <figcaption>Handover day: everything new, and the maker's own key still in the door.</figcaption>
+</figure>
+
+<section class="hold">
+  <h2>Stated limits</h2>
+  <ul>
+    <li>The entire default detection is the two exact comparisons at the top level only, run independently, so one file can earn both warnings in a single run. When neither matches, the run logs No default password found.</li>
+    <li>No other built in checks ship in the tool: it does not check ports or access controls. A nested password is never seen, a capitalised Password is not matched, and admin123, changeme, and every other factory default in the world pass and produce the no default found line.</li>
+    <li>Finding a default is a warning, not a failure, so the run exits 0 either way, and anything gating on this tool's exit code passes a configuration still shipping the factory password.</li>
+    <li>The loaded configuration must be a mapping: an empty YAML file, which loads as None, and a JSON file that loads as a list are both refused with a plain message naming what was got instead.</li>
+    <li>A missing file, an unparsable file, and a schema validation failure all exit 1.</li>
+  </ul>
 </section>
-<div class="brayer"></div>
-<section class="sheet">
-<h2><svg class="jar" viewBox="0 0 16 16"><rect x="3" y="4" width="10" height="10" rx="2" fill="#8f8c84"/></svg>The Usage Line as Printed</h2>
-<pre class="cmd">./cha-insecuredefaultconfigreporter [params]</pre>
-<div class="proof"><h3>A Red Proof Stroke on the Printed Line</h3>
-<p>The repository contains no executable of that name. The entry point is main.py, and the argument that matters most, the configuration file itself, is a required positional argument that the printed line hides inside the word params.</p></div>
-<p>The worked shapes from the foot of main.py, as plain lines:</p>
-<pre>python cha-InsecureDefaultConfigReporter.py config.yaml -s schema.json
-python cha-InsecureDefaultConfigReporter.py config.yaml -s schema.json -l DEBUG
-python cha-InsecureDefaultConfigReporter.py config.yaml
-python cha-InsecureDefaultConfigReporter.py config.custom -t yaml</pre>
-<p>A configuration with a schema, a configuration with a schema and the log level set to DEBUG, a configuration with no schema at all, and a file with a custom ending whose type is stated outright with -t yaml. The example file names are the ones main.py itself uses: config.yaml, config.json, schema.json, and config.custom.</p>
-</section>
-<div class="brayer"></div>
-<section class="sheet" id="args">
-<h2><svg class="jar" viewBox="0 0 16 16"><rect x="3" y="4" width="10" height="10" rx="2" fill="#8f8c84"/></svg>Arguments in Full</h2>
-<table>
-<tr><td><b>config_file</b></td><td>Positional. Path to the configuration file in YAML or JSON. Required. The README parameter list omits this argument altogether.</td></tr>
-<tr><td><b>-h</b></td><td>Shows the help message and exits.</td></tr>
-<tr><td><b>-s, --schema_file</b></td><td>Takes the path to the JSON schema file for validation. The one optional flag the README does describe.</td></tr>
-<tr><td><b>-t, --type</b></td><td>Chooses yaml or json for the configuration file and auto detects when it is not provided. The README lists it with the words No description provided.</td></tr>
-<tr><td><b>-l, --log_level</b></td><td>Sets the logging level, choosing among DEBUG, INFO, WARNING, ERROR, and CRITICAL, with INFO as the default. Its entry carries the same README note, since the README describes it no further either.</td></tr>
-</table>
-</section>
-<div class="brayer"></div>
-<section class="sheet" id="run">
-<h2><svg class="jar" viewBox="0 0 16 16"><rect x="3" y="4" width="10" height="10" rx="2" fill="#8f8c84"/></svg>How a Run Proceeds</h2>
-<p>The logging level is set. The configuration is loaded, by file ending when no type is given, .yaml and .yml as YAML and .json as JSON, with an ending it cannot place refused in the words Could not determine the file type. Please specify with --type.</p>
-<p>When a schema file is given, it is loaded and the configuration is validated, and a valid result is logged as Configuration is valid according to the schema. When none is given, the run warns No schema file provided. Skipping validation. and goes on.</p>
-<p>The loaded configuration must be a mapping of setting names to values. An empty YAML file, which loads as None, and a JSON file that loads as a list are both refused with a plain message naming what was got instead, rather than failing later inside the key checks.</p>
-<p>Then the two checks run, independently, never as alternatives. A top level password equal to password logs the warning Insecure default password detected. Please change it. and a top level admin_password equal to admin logs Insecure default admin password detected. Please change it. A file can earn both warnings in one run. If neither matches, the run logs No default password found.</p>
-</section>
-<div class="brayer"></div>
-<section class="sheet">
-<h2><svg class="jar" viewBox="0 0 16 16"><rect x="3" y="4" width="10" height="10" rx="2" fill="#8f8c84"/></svg>What the Check Cannot See</h2>
-<div class="proof"><h3>Top Level, Exact Values Only</h3>
-<p>The comparison is for exact values at the top level only. A nested password is not seen. Password with a capital letter is not matched. admin123, changeme, and every other factory default in the world pass and produce the no default found line.</p></div>
-<div class="proof"><h3>A Default Found Still Exits 0</h3>
-<p>Finding a default is a warning, not a failure: the run exits 0 either way, so anything gating on this tool exit code passes a configuration that still ships the factory password. Errors are the opposite case: a missing configuration file, an unparsable YAML or JSON file, a schema validation failure, and the mapping refusal all end the run at exit 1.</p></div>
-<h2>Licence Line as Printed</h2>
-<div class="fault"><h3>Wrong Organisation, Left as Printed</h3>
-<pre>Copyright (c) ShadowStrikeHQ</pre>
-<p>The same wrong organisation as the clone line. The repository carries a separate LICENSE file headed MIT License, while the README itself names no licence at all.</p></div>
-</section>
-</main>
-<footer><p>Theme: The Portrait Sitter's Third Hour. Type: Baloo Bhaijaan 2 for headings, Alegreya Sans for reading, both SIL Open Font License 1.1. The lettering reference Brush King was reference only and is not embedded.</p></footer>
+
+<footer>
+  <p>The README of cha-insecuredefaultconfigreporter closes with a copyright line and names no licence; the repository carries a separate LICENSE file headed MIT License. Site type is set in Amaranth and Cantarell, self-hosted under the SIL Open Font License.</p>
+</footer>
+</div>
 </body>
 </html>
