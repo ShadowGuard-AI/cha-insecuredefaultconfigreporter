@@ -11,7 +11,6 @@
 ![The studio in three depths: north light crosses the back wall once slowly, the blocked in figure on the canvas relaxes by small degrees across a long interval, and the brayer makes one short pass across its slab at rare intervals](scene.svg)
 
 
-# cha-InsecureDefaultConfigReporter
 Checks a YAML or JSON configuration file for two built-in default password values: the password setting set to 'password' and the admin_password setting set to 'admin'. Uses pyyaml to parse configuration files and, when the user supplies a JSON schema file, jsonschema to validate the configuration against that user supplied schema. No other built-in checks ship in this tool: it does not check ports or access controls.
 
 ![A major divider: a brayer pass, a band of ink rolled across the full width, dense at its centre and feathering at both ends](sep-heavy.svg)
